@@ -47,6 +47,7 @@ This file could not be found: <?= $_SERVER['REQUEST_URI'] ?>
 	
 	updatePhishURLCache();
 	
+	header('HTTP/1.1 200 OK');
 	header('content-type: text/javascript');
 	header('Content-Length: ' . filesize(URL_CACHE_FILE));
 	ob_clean();
