@@ -9,7 +9,7 @@ class phishingServer {
 			<body>
 			  <p>Sehr geehrter Nutzer,</p>
 			  <p>hiermit erhalten Sie eine Mail die Von jedem h&auml;tte versendet werden k&ouml;nnen.</p>
-			  <p>Sie enth&auml;lt zum Beispiel einen Link <a href="phishedu://maillink/">http://www.google.com</a>.</p>
+			  <p>Sie enth&auml;lt zum Beispiel einen Link <a href="http://pages.no-phish.de/maillink.php">http://www.google.com</a>.</p>
 			  <p>Sowie ihren Personalisierten Text:</p>
 			  <p>{$usermessage}</p>
 			</body>
@@ -20,9 +20,7 @@ EOF;
 		$header .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
 		// zusätzliche Header
-		$header .= 'To: '.$to. "\r\n";
 		$header .= 'From: '.$from. "\r\n";
-
 		
 		/*This is the direct send option
 		require("./class.smtpSend.php");
