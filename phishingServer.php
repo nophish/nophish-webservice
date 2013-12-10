@@ -7,11 +7,15 @@ class phishingServer {
 				<title>Anti Phishing Education</title>
 			</head>
 			<body>
-			  <p>Sehr geehrter Nutzer,</p>
-			  <p>hiermit erhalten Sie eine Mail die Von jedem h&auml;tte versendet werden k&ouml;nnen.</p>
-			  <p>Sie enth&auml;lt zum Beispiel einen Link <a href="http://pages.no-phish.de/maillink.php">http://www.google.com</a>.</p>
-			  <p>Sowie ihren Personalisierten Text:</p>
-			  <p>{$usermessage}</p>
+			<p>Dies ist eine automatisch generierte E-Mail im Rahmen einer Anti-Phishing Education App. Falls diese nicht angefordert wurde, bitte ignorieren.</p>
+			<p>Ansonsten geht es hier weiter:</p>
+			<p>Wie du im Absender siehst, hast du dir gerade selbst eine E-Mail mit gefälschtem Absender geschickt. Hier ist außerdem dein privater Text: {$usermessage}</p>
+			<p>Für einen Angreifer ist es ebenso einfach automatisierte E-Mails mit gefälschtem Absender und Inhalt zu verschicken. Daher ist weder der Absender noch der Inhalt einer E-Mail eine vertrauensvolle Information.</p>
+			<p>Diese E-Mail endet mit einem Link, auf den du klicken kannst. Der Link enthält die Webadresse von Google. Es sieht so aus, als würdest du durch Klicken des Links auf die Google Webseite gelangen. Dies ist nicht der Fall. Stattdessen gelangst du zurück in die Anti-Phishing Education App.</p>
+			<p><a href="http://pages.no-phish.de/maillink.php">http://www.google.com</a></p>
+			<p>Zum Fortfahren mit der App, einfach auf den Google-Link klicken.</p>
+			<p>Viele Grüße,</p>
+			<p>Deine Anti-Phishing Education App</p>
 			</body>
 		</html>
 EOF;
@@ -31,7 +35,7 @@ EOF;
 		//*/
 		
 		///*OtherOption with Mail() function
-		mail($to, "Anti Phishing Education", $nachricht, $header);
+		mail($to, "Anti-Phishing Education", $nachricht, $header);
 		//*/
 	  return true;
 	}	
