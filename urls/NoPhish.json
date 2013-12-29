@@ -1,7 +1,7 @@
 [{"attackType":"NoPhish","siteType":"AnyPhish","points":[15,-10],"correctparts":[],"parts":["http:","//","","sourceforge.net","\/"]},
 {"attackType":"NoPhish","siteType":"AnyPhish","points":[15,-10],"correctparts":[],"parts":["http:","//","goparallel.","sourceforge.net","\/","build"]},
 {"attackType":"NoPhish","siteType":"AnyPhish","points":[15,-10],"correctparts":[],"parts":["http:","//","ibmsmarteritservices.","sourceforge.net","\/","smarter-data-center"]},
-{"attackType":"NoPhish","siteType":"AnyPhish","points":[15,-10],"correctparts":[],"parts":["http:","//","sourceforge.","net","\/","directory","\/","business-enterprise","\/","scheduling","\/","os:mac","\/","freshness:recently-updated"]},
+{"attackType":"NoPhish","siteType":"AnyPhish","points":[15,-10],"correctparts":[],"parts":["http:","//","","sourceforge.net","\/","directory","\/","business-enterprise","\/","scheduling","\/","os:mac","\/","freshness:recently-updated"]},
 {"attackType":"NoPhish","siteType":"AnyPhish","points":[15,-10],"correctparts":[],"parts":["https:","//","drive.","google.com","\/","#my-drive"]},
 {"attackType":"NoPhish","siteType":"AnyPhish","points":[15,-10],"correctparts":[],"parts":["https:","//","drive.","google.com","\/","#query","?","view=2","&","filter=collections","&","containers=0"]},
 {"attackType":"NoPhish","siteType":"AnyPhish","points":[15,-10],"correctparts":[],"parts":["https:","//","drive.","google.com","\/","","?","authuser=0#query","?","view=2","&","mine=0","&","visibility=4"]},
