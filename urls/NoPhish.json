@@ -65,7 +65,7 @@
 {"attackType":"NoPhish","siteType":"AnyPhish","points":[15,-10],"correctparts":[],"parts":["http:","//","www.","gmx.net","\/","produkte","\/","mail","\/","promail"]},
 {"attackType":"NoPhish","siteType":"AnyPhish","points":[15,-10],"correctparts":[],"parts":["https:","//","lotto.","gmx.net","\/","webshop","\/","product","\/","lottonormal","?","partnerId=0GMHOM0HOM","&","advertisementId=0REITER000000000000000000000000000000000000"]},
 {"attackType":"NoPhish","siteType":"AnyPhish","points":[15,-10],"correctparts":[],"parts":["http:","//","www.","web.de","\/"]},
-{"attackType":"NoPhish","siteType":"AnyPhish","points":[15,-10],"correctparts":[],"parts":["https:","//","web.de","\/","fm"]},
+{"attackType":"NoPhish","siteType":"AnyPhish","points":[15,-10],"correctparts":[],"parts":["https:","//","","web.de","\/","fm"]},
 {"attackType":"NoPhish","siteType":"AnyPhish","points":[15,-10],"correctparts":[],"parts":["http:","//","mobile.","web.de","\/","","?","__reuse=1385992696270"]},
 {"attackType":"NoPhish","siteType":"AnyPhish","points":[15,-10],"correctparts":[],"parts":["https:","//","mobile.","web.de","\/","Kosten","?","__sendingdata=1","&","cart.action=add-bundle","&","cart.bundle=bundle-an-flex500-mvl","&","linkId=ct.btn.weiter.flex-500-mvl","&","__action=cartAction"]},
 {"attackType":"NoPhish","siteType":"AnyPhish","points":[15,-10],"correctparts":[],"parts":["https:","//","produkte.","web.de","\/","freemail-webmail","\/","","?","mc=hp@fm@reiter.produkte@freemail"]},
