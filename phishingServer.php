@@ -26,17 +26,18 @@ EOF;
 		// zusätzliche Header
 		$header .= 'From: '.$from. "\r\n";
 		
-		/*This is the direct send option
+		///*This is the direct send option
 		require("./class.smtpSend.php");
 		$smtp = new smtpSend($from);
-		if(!$smtp->send($to, "Anti Phishing Education", $nachricht, $header)){
-          return $smtp->getError();
-        }
+    if(!$smtp->send($to, "Anti Phishing Education", $nachricht, $header)){
+      return $smtp->getError();
+      //return false;
+    }
 		//*/
 		
-		///*OtherOption with Mail() function
+		/*OtherOption with Mail() function
 		mail($to, "Anti-Phishing Education", $nachricht, $header);
 		//*/
-	  return true;
+	  return "200";
 	}	
 }

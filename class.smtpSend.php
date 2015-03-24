@@ -22,7 +22,7 @@ class smtpSend
     }
     
     protected function _die($msg, $line, $file){
-        $this->error = trim($msg). " @ $file:$line ";
+        $this->error = trim($msg);
     }
     
     protected function _sockPut(&$socket, $msg, $level = 1){
@@ -40,13 +40,13 @@ class smtpSend
         return false;
     }
 
-    protected function _parse($socket, $response, $line = __LINE__, $level = 1) 
+    protected function _parse($socket, $response, $line = __LINE__, $level = 1, $fehler_meldung = "Problem beim Senden der Mail") 
     { 
 	    while (@substr($server_response, 3, 1) != ' ') 
 	    {
 		    if (!($server_response = fgets($socket, 256))) 
 		    { 
-			    $this->_die("Couldn't get mail server response codes", $line, __FILE__); 
+			    $this->_die("Der Server antwortete nicht auf unsere Anfrage.", $line, __FILE__); 
 		    } 
             if($this->debug >= $level) 
                 echo $server_response;
@@ -54,7 +54,7 @@ class smtpSend
 
 	    if (!(substr($server_response, 0, 3) == $response)) 
 	    { 
-		    $this->_die("Ran into problems sending Mail. Response: $server_response", $line, __FILE__); 
+		    $this->_die("$fehler_meldung: Antwort: $server_response", $line, __FILE__); 
 	    }else{
 	        return substr($server_response, 4);
 	    } 
@@ -77,7 +77,7 @@ class smtpSend
 
 	    $mxhosts = $this->_getMxHosts($to);
 	    if(!$mxhosts){
-	        $this->_die("No MX records could be identified for email $to", __LINE__, __FILE__);
+	        $this->_die("Die angegebene Zieladresse ($to) ist nicht korrekt.", __LINE__, __FILE__);
 	    }
 	    $socket = false;
 	    
@@ -88,7 +88,7 @@ class smtpSend
 	        }
 	    }
 	    if(!$socket){
-	        $this->_die("Could not connect to smtp host : $errno : $errstr", __LINE__, __FILE__);
+	        $this->_die("Der Mailserver ist nicht erreichbar : $errno : $errstr", __LINE__, __FILE__);
 	    }
 
 	    if($this->error !== false)
@@ -98,7 +98,7 @@ class smtpSend
 	    $mxHost = (!empty($mxReady))?substr($mxReady, 0, strpos($mxReady, ' ')):$mxhosts[0];
 
 	    $this->_sockPut($socket, "HELO " . $mxHost . "\r\n", 1);
-	    $this->_parse($socket, "250", __LINE__, 5);
+	    $this->_parse($socket, "250", __LINE__, 5,"Server reagiert nicht auf erste Anfrage");
 	    
 	    if($this->error !== false){
 	        fclose($socket);
@@ -107,14 +107,14 @@ class smtpSend
 	        
 	    // Specify who the mail is from....
 	    $this->_sockPut($socket, "MAIL FROM: <" . $this->fromEmail . ">\r\n", 2);
-	    $this->_parse($socket, "250", __LINE__, 5);
+	    $this->_parse($socket, "250", __LINE__, 5, "Die Absenderadresse wurde abgelehnt. Bitte wähle eine andere Absenderadresse.");
 
 	    if($this->error !== false){
 	        fclose($socket);
 	        return false;
 	    }    
 	    $this->_sockPut($socket, "RCPT TO: <" . $to . ">\r\n", 2);
-	    $this->_parse($socket, "250", __LINE__, 5);
+	    $this->_parse($socket, "250", __LINE__, 5, "Die Empfängeradresse wurde abgelehnt.");
 
 	    if($this->error !== false){
 	        fclose($socket);
@@ -124,7 +124,7 @@ class smtpSend
 	    $this->_sockPut($socket, "DATA\r\n", 5);
 
 	    // This is the last response code we look for until the end of the message.
-	    $this->_parse($socket, "354", __LINE__, 5);
+	    $this->_parse($socket, "354", __LINE__, 5, "Der Server Akzeptiert keine Nachricht.");
 
 	    if($this->error !== false){
 	        fclose($socket);
@@ -146,7 +146,7 @@ class smtpSend
 	    // Ok the all the ingredients are mixed in let's cook this puppy...
 	    $this->_sockPut($socket, ".\r\n", 9);
 
-        $this->_parse($socket, "250", __LINE__, 9);
+        $this->_parse($socket, "250", __LINE__, 9, "Der Mail Text wurde abgelehnt.");
 
 	    if($this->error !== false){
 	        fclose($socket);
