@@ -54,7 +54,7 @@ class smtpSend
 
 	    if (!(substr($server_response, 0, 3) == $response)) 
 	    { 
-		    $this->_die("$fehler_meldung: Antwort: $server_response", $line, __FILE__); 
+		    $this->_die("$fehler_meldung", $line, __FILE__); 
 	    }else{
 	        return substr($server_response, 4);
 	    } 
@@ -78,11 +78,12 @@ class smtpSend
 	    $mxhosts = $this->_getMxHosts($to);
 	    if(!$mxhosts){
 	        $this->_die("Die angegebene Zieladresse ($to) ist nicht korrekt.", __LINE__, __FILE__);
+		return false;
 	    }
 	    $socket = false;
 	    
-        foreach($mxhosts['mx'] as $smtp_host){
-	        if($socket = fsockopen($smtp_host, 25, $errno, $errstr, 20) )
+            foreach($mxhosts['mx'] as $smtp_host){
+	        if($socket = fsockopen('ssl://'.$smtp_host, 465, $errno, $errstr, 20) )
 	        {
 		        break;
 	        }
@@ -97,7 +98,7 @@ class smtpSend
 	    $mxReady = $this->_parse($socket, "220", __LINE__, 5);
 	    $mxHost = (!empty($mxReady))?substr($mxReady, 0, strpos($mxReady, ' ')):$mxhosts[0];
 
-	    $this->_sockPut($socket, "HELO " . $mxHost . "\r\n", 1);
+	    $this->_sockPut($socket, "HELO " . $mxHost . "\r\n", 2);
 	    $this->_parse($socket, "250", __LINE__, 5,"Server reagiert nicht auf erste Anfrage");
 	    
 	    if($this->error !== false){
@@ -130,10 +131,13 @@ class smtpSend
 	        fclose($socket);
 	        return false;
 	    }    
+
 	    // Send the Subject Line...
 	    $this->_sockPut($socket, "Subject: $subject\r\n", 8);
+	    $this->_sockPut($socket, "To: $to\r\n", 8);
+	    $this->_sockPut($socket, "Date: ".gmdate("d M Y H:i:s -0000")."\r\n", 8);
 
-        if(!empty($headers)){
+            if(!empty($headers)){
 	       // Now any custom headers....
 	       $this->_sockPut($socket, "$headers\r\n", 8);
 	    }
